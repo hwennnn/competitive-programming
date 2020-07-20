@@ -10,30 +10,15 @@ int main()
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	int n, x, y, curr_end = 0, total = 0;
-	vector<pair<int, int>> arr;
-	cin >> n;
+	int numBottles = 15, numExchange = 4;
+	int res = numBottles;
 
-	while (n--)
-	{
-		cin >> x >> y;
-		arr.push_back(make_pair(y, x));
+	while (numBottles >= numExchange){
+		int remain = numBottles%numExchange;
+		numBottles /= numExchange;
+		res += numBottles;
+		numBottles += remain;
 	}
-
-	sort(arr.begin(), arr.end());
-
-	// for (auto ele : arr){
-	// 	cout << ele.first << " " << ele.second << endl;
-	// }
-
-	for (auto ele : arr)
-	{
-		if (ele.second >= curr_end)
-		{
-			curr_end = ele.first;
-			total++;
-		}
-	}
-	cout << total;
-	return 0;
+	
+	cout << res;
 }

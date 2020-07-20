@@ -1,3 +1,4 @@
-	for (auto ele : arr){
-		cout << ele.first << " " << ele.second << endl;
-	}
+3
+3 5
+8 9
+5 8
