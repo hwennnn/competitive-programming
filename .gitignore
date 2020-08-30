@@ -34,3 +34,13 @@
 .DS_Store
 
 .vscode
+
+**/test.py*
+test.cpp
+a.py
+a.cpp
+cses.py
+
+**/tempCodeRunnerFile*
+
+*.png
