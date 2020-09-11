@@ -1,25 +1,23 @@
 # find maximum product subarray
 
-arr = [5,-2,-1,-5,0,100]
+arr = [1, -3, -5, -2, 0, 4]
 
-pos = 1
-neg = 1
-res = 1
-
-for i in range(len(arr)):
-    if arr[i] > 0:
-        pos *= arr[i]
-        neg = min(1, neg*arr[i])
+pos = arr[0]
+neg = arr[0]
+res = arr[0]
+print(pos, neg, res)
+for i in range(1, len(arr)):
     
-    elif arr[i] == 0:
-        pos = 1
-        neg = 1
+    if arr[i] > 0:
+        pos = max(pos*arr[i], arr[i])
+        neg = min(neg*arr[i], arr[i])
     
     else:
-        temp = pos
-        pos = max(neg * arr[i],1)
-        neg = temp * arr[i]
+        tempMax = max(neg*arr[i], arr[i])
+        neg = min(pos*arr[i], arr[i])
+        pos = tempMax
+    
     
     res = max(res, pos)
-
+    print(pos, neg, res)
 print(res)
