@@ -21,4 +21,4 @@ def solve(arr):
         print(pos, neg, res)
     return res
 
-print(solve([2,3,-2,4.-10]))
+print(solve([2,3,-2,4,-10]))
