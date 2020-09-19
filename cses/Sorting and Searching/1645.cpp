@@ -17,7 +17,7 @@ int main()
     for (int i = 0; i < n; ++i){
         cin >> a[i];
         v[i] = i-1;
-        while (~v[i] && a[v[i]]>=a[i])
+        while (a[v[i]]>=a[i])
             v[i] = v[v[i]];
         
         cout << v[i]+1 << " ";
