@@ -18,36 +18,31 @@ class Solution:
         q = [] 
         q.append(root) 
         i = 0
+        isEven = True
         while q: 
 
-            c = []
             prev = None
             count = len(q)
-
+            
             while count > 0: 
                 temp = q.pop(0) 
-                c.append(temp.val)
+                num = temp.val
                 if temp.left: 
                     q.append(temp.left) 
                 if temp.right: 
                     q.append(temp.right) 
-
-                count -= 1
-                
-            for num in c:
-                if (i)%2 == 0:
-
+                    
+                if isEven:
                     if num%2 == 0 or prev and num <= prev:
                         return False
-
                 else:
                     if num%2 or prev and num >= prev:
                         return False
 
                 prev = num
-            i += 1
-            # print(c)
-        
+                count -= 1
+            isEven = not isEven
+                
         return True
     
     def isEvenOddTree(self, root: TreeNode) -> bool:
