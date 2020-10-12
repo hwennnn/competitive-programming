@@ -18,28 +18,24 @@ class Solution:
             
             n = len(q)
             check = []
-            
+            prev = None
             while n:
                 node = q.popleft()
-                check.append(node.val)
+                val = node.val
+                if isEven:
+                    if val % 2 == 0 or prev and val <= prev:
+                        return False
+                else:
+                    if val % 2 or prev and val >= prev:
+                        return False
+                
+                prev = val
                 
                 for t in (node.left,node.right):
                     if t:
                         q.append(t)
                 
                 n -= 1
-            
-            previous = None
-
-            for c in check:
-                if isEven:
-                    if c % 2 == 0 or previous and c <= previous:
-                        return False
-                else:
-                    if c % 2 or previous and c >= previous:
-                        return False
-                
-                previous = c
                 
             isEven = not isEven
                 
