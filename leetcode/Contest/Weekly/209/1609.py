@@ -1,50 +1,46 @@
 # 1609. Even Odd Tree
 # https://leetcode.com/problems/even-odd-tree/
 
-from collections import deque  
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
 class Solution:
-    def printLevelOrder(self, root): 
-
-        if root is None: 
-            return
+    def isEvenOddTree(self, root: TreeNode) -> bool:
+        if not root: return False
         
-        q = [] 
-        q.append(root) 
-        i = 0
+        q = deque()
+        q.append(root)
         isEven = True
-        while q: 
-
-            prev = None
-            count = len(q)
+        while q:
             
-            while count > 0: 
-                temp = q.pop(0) 
-                num = temp.val
-                if temp.left: 
-                    q.append(temp.left) 
-                if temp.right: 
-                    q.append(temp.right) 
-                    
+            n = len(q)
+            check = []
+            
+            while n:
+                node = q.popleft()
+                check.append(node.val)
+                
+                for t in (node.left,node.right):
+                    if t:
+                        q.append(t)
+                
+                n -= 1
+            
+            previous = None
+
+            for c in check:
                 if isEven:
-                    if num%2 == 0 or prev and num <= prev:
+                    if c % 2 == 0 or previous and c <= previous:
                         return False
                 else:
-                    if num%2 or prev and num >= prev:
+                    if c % 2 or previous and c >= previous:
                         return False
-
-                prev = num
-                count -= 1
+                
+                previous = c
+                
             isEven = not isEven
                 
         return True
-    
-    def isEvenOddTree(self, root: TreeNode) -> bool:
-        return self.printLevelOrder(root)  
-        
