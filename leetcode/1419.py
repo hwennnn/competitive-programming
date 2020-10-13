@@ -4,15 +4,12 @@
 class Solution:
     def minNumberOfFrogs(self, S: str) -> int:
         dic = {"c","r","o","a","k"}
+        c = m = peak = 0
         
-        c = m = 0
-        peak = 0
         for s in S:
-            added = False
             if s == "c":
                 m += 1
                 c += 4
-                added = True
             
             else:
                 c -= 1
