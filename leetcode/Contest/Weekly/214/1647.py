@@ -3,8 +3,8 @@
 
 from heapq import heappop, heappush
 
-# max heap
 class Solution:
+    # max heap
     def minDeletions(self, s: str) -> int:
         c = Counter(s)
         q = []
@@ -27,4 +27,21 @@ class Solution:
                 res += 1
         
         return res
-                
+    
+    # greedy
+    def minDeletions(self, S: str) -> int:
+        c = Counter(S)
+        s = set()
+        res = 0
+        
+        for v in c.values():
+            t = v
+            
+            while t in s:
+                res += 1
+                t -= 1
+            
+            if t != 0:
+                s.add(t)
+            
+        return res
