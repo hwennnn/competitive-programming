@@ -3,25 +3,27 @@
 
 from heapq import heappop, heappush
 
+# max heap
 class Solution:
     def minDeletions(self, s: str) -> int:
         c = Counter(s)
         q = []
         
         for v in c.values():
-            heappush(q, (-v, v))
+            heappush(q, -v)
         
         res = 0
         while q:
-            _, freq = heappop(q)
+            freq = heappop(q)
+            freq = -freq
             
             if not q:
                 return res
             
-            if freq == q[0][1]:
+            if freq == -q[0]:
                 if freq > 1:
                     v = freq - 1
-                    heappush(q, (-v, v))
+                    heappush(q, -v)
                 res += 1
         
         return res
