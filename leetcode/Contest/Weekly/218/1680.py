@@ -1,0 +1,13 @@
+# 1680. Concatenation of Consecutive Binary Numbers
+# https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/
+
+class Solution:
+    def concatenatedBinary(self, n: int) -> int:
+        M = 10 ** 9 + 7
+        s = []
+        for i in range(1, n+1):
+            s.append(str(bin(i)[2:]))
+        
+        s = "".join(s)
+        
+        return int(s,2) % M
