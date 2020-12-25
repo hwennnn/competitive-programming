@@ -35,4 +35,21 @@ class Solution:
                     res -= 1
         
         return res
+    
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        
+        res = 0
+        mp = collections.Counter(nums)
+        
+        for key in mp.keys():
+            if key * 2 == k:
+                res += mp[key] // 2
+            
+            elif k - key in mp:
+                mmin = min(mp[key], mp[k-key])
+                res += mmin
+                mp[key] -= mmin
+                mp[k-key] -= mmin
+        
+        return res
         
