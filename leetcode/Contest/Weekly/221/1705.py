@@ -6,25 +6,24 @@ from heapq import heappop, heappush
 class Solution:
     def eatenApples(self, apples: List[int], days: List[int]) -> int:
         n = len(apples)
-        res = i = 0
-        q = []
+        heap = []
+        i = res = 0
         
         while True:
             if i < n:
-                heappush(q, (i + days[i], apples[i]))
+                heappush(heap, (i+days[i], apples[i]))
             
-            while q and q[0][0] <= i:
-                heappop(q)
-            
-            if q:
-                d,a = heappop(q)
+            while heap and heap[0][0] <= i:
+                heappop(heap)
+                
+            if heap:
+                rot, apple = heappop(heap)
                 res += 1
                 
-                if a > 1:
-                    heappush(q, (d, a-1))
-                
+                if apple > 1:
+                    heappush(heap, (rot, apple-1))
             
-            if not q and i >= n: break
+            if not heap and i >= n: break
             
             i += 1
         
