@@ -1,0 +1,18 @@
+# 754. Reach a Number
+# https://leetcode.com/problems/reach-a-number/
+
+class Solution:
+    def reachNumber(self, target: int) -> int:
+        target = abs(target)
+        step = c = 0
+        
+        while c < target:
+            step += 1
+            c += step
+            
+        
+        while (c-target) % 2 != 0:
+            step += 1
+            c += step
+            
+        return step
