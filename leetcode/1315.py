@@ -22,3 +22,15 @@ class Solution:
         res = self.helperR(root, 2) if root.val % 2 == 0 else 0
 
         return res + self.sumEvenGrandparent(root.left) + self.sumEvenGrandparent(root.right)
+    
+    # dfs to the end
+    def dfs(self, current, parent, grandparent):
+        if not current: return 0
+        res = 0
+        if grandparent and grandparent.val % 2 == 0:
+            res += current.val
+        
+        return res + self.dfs(current.left, current, parent) + self.dfs(current.right, current, parent)
+        
+    def sumEvenGrandparent(self, root: TreeNode) -> int:
+        return self.dfs(root, None, None)
