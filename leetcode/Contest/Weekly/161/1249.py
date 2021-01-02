@@ -2,7 +2,35 @@
 # https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
 
 class Solution:
-    def minRemoveToMakeValid(self, s: str) -> str:
+    def minRemoveToMakeValid(self, s: str):
+        stack = []
+        res = [""] * len(s)
+        forbidden = set()
+        
+        for i,c in enumerate(s):
+            if c == ")":
+                if stack and stack[-1][1] == "(": 
+                    stack.pop()
+                    res[i] = c
+                else:
+                    forbidden.add(i)
+
+            elif c == "(":
+                res[i] = c
+                stack.append((i,c))
+            
+            else:
+                res[i] = c
+
+        if len(stack) > 0:
+            forbidden |= set([i for i,_ in stack])
+
+            for i in forbidden:
+                res[i] = ""
+
+        return "".join(res)
+        
+    def minRemoveToMakeValid(self, s: str):
         stack = []
         res = []
         forbidden = set()
