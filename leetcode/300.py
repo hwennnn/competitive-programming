@@ -2,7 +2,18 @@
 # https://leetcode.com/problems/longest-increasing-subsequence/
 
 class Solution:
-    def lengthOfLIS(self, nums: List[int]) -> int:
+    def lengthOfLIS(self, nums: List[int]):
+        stack = []
+        for x in nums:
+            index = bisect_left(stack, x)
+            if index == len(stack):
+                stack.append(x)
+            else:
+                stack[index] = x
+        
+        return len(stack)
+    
+    def lengthOfLIS(self, nums: List[int]):
         res = 1
         n = len(nums)
         if n == 0: return 0
