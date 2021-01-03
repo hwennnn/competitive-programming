@@ -2,6 +2,20 @@
 # https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/
 
 class Solution:
+    def waysToSplit(self, nums: List[int]):
+        prefix = [0]
+        for num in nums:
+            prefix.append(prefix[-1] + num)
+        
+        M = 10 ** 9 + 7
+        ans = 0
+        for i in range(1, len(nums)): 
+            j = bisect_left(prefix, 2*prefix[i])
+            k = bisect_right(prefix, (prefix[i] + prefix[-1])//2)
+            ans += max(0, min(len(nums), k) - max(i+1, j))
+
+        return ans % M
+    
     def helper(self, prefix, leftSum, i, searchLeft):
         n = len(prefix)
         left, right = i, n - 2
