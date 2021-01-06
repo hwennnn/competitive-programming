@@ -3,6 +3,18 @@
 
 class Solution:
     def findKthPositive(self, arr: List[int], k: int):
+        start = 1
+        
+        s = set(arr)
+        
+        while k > 0:
+            if start not in s: k -= 1
+                
+            start += 1
+        
+        return start - 1
+        
+    def findKthPositive(self, arr: List[int], k: int):
         n = len(arr)
         res = [False for _ in range(1001)]
         
