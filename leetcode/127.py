@@ -3,6 +3,40 @@
 
 class Solution:
     def ladderLength(self, begin: str, end: str, wordList: List[str]):
+
+        def construct(words):
+            mp = collections.defaultdict(set)
+            
+            for w in words:
+                for i in range(len(w)):
+                    t = w[:i] + "_" + w[i+1:]
+                    mp[t].add(w)
+            
+            return mp
+        
+        def bfs(s):
+            deq = collections.deque([(begin, 1)])
+            visited = set()
+            
+            while deq:
+                word, count = deq.popleft()
+                if word not in visited:
+                    visited.add(word)
+                    if word == end: return count
+                
+                    for i in range(len(word)):
+                        t = word[:i] + "_" + word[i+1:]
+
+                        for nei in s[t]:
+                            if nei not in visited:
+                                deq.append((nei, count+1))
+
+            return 0
+        
+        s = construct(set(wordList))
+        return bfs(s)
+
+    def ladderLength(self, begin: str, end: str, wordList: List[str]):
         s = set(wordList)
         if end not in s: return 0
         
