@@ -3,6 +3,33 @@
 
 class Solution:
     def maximumGain(self, s: str, x: int, y: int):
+        
+        def remove(s, target, val):
+            total = 0
+            stack = []
+            
+            for c in s:
+                stack.append(c)
+                
+                while len(stack) >= 2 and (stack[-2]+stack[-1]) == target:
+                    stack.pop()
+                    stack.pop()
+                    total += val
+            
+            return stack, total
+        
+        if x > y:
+            s, val1 = remove(s, "ab", x)
+            s, val2 = remove(s, "ba", y)
+            
+            return val1 + val2
+        else:
+            s, val1 = remove(s, "ba", y)
+            s, val2 = remove(s, "ab", x)
+            
+            return val1 + val2
+        
+    def maximumGain(self, s: str, x: int, y: int):
         a = b = res = 0
         
         if x == y:
