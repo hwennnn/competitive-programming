@@ -1,5 +1,5 @@
 # 1091. Shortest Path in Binary Matrix
-# https://leetcode.com/problems/shortest-path-in-binary-matrix/
+# https://leetcode.com/problems/shortest-path-in-binary-matrix/submissions/
 
 class Solution:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
@@ -7,7 +7,6 @@ class Solution:
         
         rows, cols = len(grid), len(grid[0])
         queue = collections.deque([(0,0,1)])
-        visited = set()
         
         while queue:
             x, y, steps = queue.popleft()
@@ -17,9 +16,9 @@ class Solution:
             for nx in range(-1, 2):
                 for ny in range(-1, 2):
                     dx, dy = x + nx, y + ny
-                    if 0 <= dx < rows and 0 <= dy < cols and (dx,dy) not in visited and grid[dx][dy] == 0: 
+                    if 0 <= dx < rows and 0 <= dy < cols and grid[dx][dy] == 0:
+                        grid[dx][dy] = 1
                         queue.append((dx,dy,steps+1))
-                        visited.add((dx,dy))
 ​
         return -1
         
