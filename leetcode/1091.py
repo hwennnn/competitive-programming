@@ -1,5 +1,5 @@
 # 1091. Shortest Path in Binary Matrix
-# https://leetcode.com/problems/shortest-path-in-binary-matrix/submissions/
+# https://leetcode.com/problems/shortest-path-in-binary-matrix
 
 class Solution:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
