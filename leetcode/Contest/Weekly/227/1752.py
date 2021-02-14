@@ -3,16 +3,15 @@
 
 class Solution:
     def check(self, nums: List[int]) -> bool:
-        start = 0
+        n = len(nums)
+        k = 0
         
-        for i,x in enumerate(nums):
-            if i == 0: continue
+        for i in range(n):
+            if nums[i] > nums[(i+1)%n]:
+                k += 1
             
-            if x >= nums[i-1]: continue
-            else:
-                if start != 0: return False
-                start = i
+            if k > 1: return False
                 
-        return sorted(nums) == nums[start:] + nums[:start]
+        return True
             
             
