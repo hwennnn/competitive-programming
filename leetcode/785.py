@@ -2,19 +2,24 @@
 # https://leetcode.com/problems/is-graph-bipartite
 
 class Solution:
-    def isBipartite(self, graph):
-​
-        n, colored = len(graph), {}
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        
+        n = len(graph)
+        coloured = {}
+        
         for i in range(n):
-            if i not in colored and graph[i]:
-                colored[i] = 1
-                q = collections.deque([i])
-                while q:
-                    cur = q.popleft()
-                    for nb in graph[cur]:
-                        if nb not in colored:
-                            colored[nb] = -colored[cur]
-                            q.append(nb)
-                        elif colored[nb] == colored[cur]:
+            if i not in coloured:
+                coloured[i] = 1
+                
+                queue = collections.deque([i])
+                
+                while queue:
+                    node = queue.popleft()
+                    for nei in graph[node]:
+                        if nei not in coloured:
+                            coloured[nei] = -coloured[node]
+                            queue.append(nei)
+                        elif coloured[nei] == coloured[node]:
                             return False
+        
         return True
