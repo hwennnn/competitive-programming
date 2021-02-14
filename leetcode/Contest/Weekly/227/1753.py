@@ -4,6 +4,7 @@
 from heapq import heappush, heappop, heapify
 ​
 class Solution:
+    # heap
     def maximumScore(self, a: int, b: int, c: int) -> int:
         res = 0
         stones = [-a,-b,-c]
@@ -19,5 +20,9 @@ class Solution:
             res += 1
             
         return res
+    
+    # reverse engineering / math
+    def maximumScore(self, a: int, b: int, c: int) -> int:
+        return min((a+b+c)//2 , a+b+c - max(a,b,c))
             
             
