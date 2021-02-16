@@ -3,7 +3,7 @@
 
 class Solution:
     # backtracking
-    def letterCasePermutation(self, S: str) -> List[str]:
+    def letterCasePermutation(self, S: str):
         res = []
         n = len(S)
         
@@ -27,7 +27,7 @@ class Solution:
         return res
     
     # bitmask
-    def letterCasePermutation(self, S: str) -> List[str]:
+    def letterCasePermutation(self, S: str):
         n = len(S)
         res = set()
         
