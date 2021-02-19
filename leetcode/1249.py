@@ -1,20 +1,20 @@
 # 1249. Minimum Remove to Make Valid Parentheses
-# https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
+# https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses
 
 class Solution:
-    def minRemoveToMakeValid(self, s: str) -> str:
+    def minRemoveToMakeValid(self, s: str):
         res = ""
         stack = []
         mp = {}
         
         for i,c in enumerate(s):
-            if c == "(" or c == ")":
-                if c == ")" and stack and stack[-1][1] == "(":
-                    x, p = stack.pop()
-                    mp[x] = p
-                    mp[i] = c
-                else:
-                    stack.append((i,c))
+            if c == ")" and stack and stack[-1][1] == "(":
+                x, p = stack.pop()
+                mp[x] = p
+                mp[i] = c
+                
+            elif c == "(":
+                stack.append((i,c))
         
         
         for i,c in enumerate(s):
@@ -25,7 +25,8 @@ class Solution:
                 res += c
         
         return res
-    
+​
+        
     def minRemoveToMakeValid(self, s: str) -> str:
         stack = []
         s = list(s)
