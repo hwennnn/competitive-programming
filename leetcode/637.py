@@ -13,11 +13,10 @@ class Solution:
         deq = collections.deque([root])
         
         while deq:
-            i = len(deq)
+            n = len(deq)
             total = 0
-            count = 0
             
-            while i > 0:
+            for _ in range(n):
                 node = deq.popleft()
                 total += node.val
                 
@@ -25,12 +24,8 @@ class Solution:
                     if leaf:
                         deq.append(leaf)
                 
-                i -= 1
-                count += 1
-            
-            res.append(total/count)
+            res.append(total/n)
 ​
-                
         return res
         
         
