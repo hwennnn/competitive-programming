@@ -8,13 +8,7 @@ class Solution:
         mp = {}
         
         def mapped(word):
-            s = []
-            for w in word:
-                if w in "aeiouAEIOU":
-                    s.append("_")
-                else:
-                    s.append(w.lower())
-            return "".join(s)
+            return "".join(['_' if w in "aeiouAEIOU" else w.lower() for w in word])
         
         for i, w in enumerate(wordlist):
             l = "".join([c.lower() for c in w])
