@@ -12,7 +12,6 @@ class Solution:
         a_visited = [[False for _ in range(cols)] for _ in range(rows)]
         
         def dfs(i, j, visited):
-            print(i, j)
             visited[i][j] = True
             
             for dx,dy in ((i+1, j), (i-1, j), (i, j-1), (i, j+1)):
