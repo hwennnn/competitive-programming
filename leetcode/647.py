@@ -1,25 +1,23 @@
 # 647. Palindromic Substrings
-# https://leetcode.com/problems/palindromic-substrings/
+# https://leetcode.com/problems/palindromic-substrings
 
 class Solution:
     def countSubstrings(self, s: str) -> int:
         res = 0
         n = len(s)
         
-        for mid in range(n):
+        def helper(left, right):
+            count = 0
             
-            left = right = mid
             while left >= 0 and right < n and s[left] == s[right]:
                 left -= 1
                 right += 1
-                res += 1
+                count += 1
             
-            if mid + 1 < n:
-                left = mid
-                right = mid + 1
-                while left >= 0 and right < n and s[left] == s[right]:
-                    left -= 1
-                    right += 1
-                    res += 1
+            return count
+        
+        for mid in range(n):
+            res += helper(mid, mid)
+            res += helper(mid, mid + 1)
         
         return res
