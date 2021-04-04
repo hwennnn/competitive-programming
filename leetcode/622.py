@@ -1,39 +1,46 @@
 # 622. Design Circular Queue
-# https://leetcode.com/problems/design-circular-queue/
+# https://leetcode.com/problems/design-circular-queue
 
 class MyCircularQueue:
 ​
-    def __init__(self, k: int):
-        self.n = k
-        self.deq = collections.deque()
+    def __init__(self, k):
+        self.size = 0
+        self.max_size = k
+        self.t = [0]*k
+        self.front = self.rear = -1
+        
+    def enQueue(self, value):
+        if self.size == self.max_size: return False
+        else:
+            if self.rear == -1:
+                self.rear = self.front = 0
+            else:
+                self.rear = (self.rear + 1)%self.max_size
+            self.t[self.rear] = value
+            self.size += 1
+            return True
+        
+    def deQueue(self):
+        if self.size == 0: return False
+        if self.front == self.rear:
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front + 1)%self.max_size
+        self.size -= 1
+        return True
+        
 ​
-    def enQueue(self, value: int) -> bool:
-        m = not self.isFull()
-        if m:
-            self.deq.append(value)
-        return m
+    def Front(self):
+        return self.t[self.front] if self.size != 0 else -1
 ​
-    def deQueue(self) -> bool:
-        m = not self.isEmpty()
-        if m:
-            self.deq.popleft()
-        return m
+    def Rear(self):
+        return self.t[self.rear] if self.size != 0 else -1
 ​
-    def Front(self) -> int:
-        m = not self.isEmpty()
-        return self.deq[0] if m else -1
+    def isEmpty(self):
+        return self.size == 0
 ​
-    def Rear(self) -> int:
-        m = not self.isEmpty()
-        return self.deq[-1] if m else -1
-​
-    def isEmpty(self) -> bool:
-        return len(self.deq) == 0
-​
-    def isFull(self) -> bool:
-        return len(self.deq) >= self.n
-​
-​
+    def isFull(self):
+        return self.size == self.max_size
 # Your MyCircularQueue object will be instantiated and called as such:
 # obj = MyCircularQueue(k)
 # param_1 = obj.enQueue(value)
