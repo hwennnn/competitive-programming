@@ -70,3 +70,14 @@ class MKAverage:
         if len(self.buffer) >= self.m:
             #print(self.left.items, self.mid.items,  self.right.items, self.mid.total, self.m, self.k)
             return int(self.mid.total / (self.m - self.k - self.k))
+        else:
+            return -1
+        
+        
+​
+​
+# Your MKAverage object will be instantiated and called as such:
+# obj = MKAverage(m, k)
+# obj.addElement(num)
+# param_2 = obj.calculateMKAverage()
+​
