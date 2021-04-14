@@ -10,10 +10,9 @@ class Solution:
     def partition(self, head: ListNode, x: int) -> ListNode:
         front = cFront = ListNode(-1)
         back = cBack = ListNode(-1)
-        curr = head
         
-        while curr:
-            v = curr.val
+        while head:
+            v = head.val
             if v < x:
                 front.next = ListNode(v)
                 front = front.next
@@ -21,12 +20,9 @@ class Solution:
                 back.next = ListNode(v)
                 back = back.next
             
-            curr = curr.next
+            head = head.next
         
-        res = cFront
-        while cFront.next:
-            cFront = cFront.next
-            
-        cFront.next = cBack.next
+        front.next = None
+        front.next = cBack.next
         
-        return res.next
+        return cFront.next
