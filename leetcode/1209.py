@@ -1,5 +1,5 @@
 # 1209. Remove All Adjacent Duplicates in String II
-# https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
+# https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii
 
 class Solution:
     def removeDuplicates(self, s: str, k: int) -> str:
@@ -7,23 +7,16 @@ class Solution:
         
         for x in s:
             if stack and stack[-1][0] == x:
-                ch, count = stack.pop()
-                stack.append((ch, count + 1))
+                stack[-1][1] += 1
             else:
-                stack.append((x, 1))
+                stack.append([x, 1])
             
             if stack and stack[-1][1] == k:
                 stack.pop()
             
             while len(stack) >= 2 and stack[-1][0] == stack[-2][0]:
-                ch, count = stack.pop()
-                count += stack.pop()[1]
-                stack.append((ch, count))
+                _, count = stack.pop()
+                stack[-1][1] += count
         
-        res = ""
-        
-        for ch,count in stack:
-            res += ch * count
-        
-        return res
+        return "".join(ch * x for ch,x in stack)
         
