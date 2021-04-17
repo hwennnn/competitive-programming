@@ -8,15 +8,11 @@ class Solution:
         for x in s:
             if stack and stack[-1][0] == x:
                 stack[-1][1] += 1
+                
+                if stack[-1][1] == k:
+                    stack.pop()
             else:
                 stack.append([x, 1])
-            
-            if stack and stack[-1][1] == k:
-                stack.pop()
-            
-            while len(stack) >= 2 and stack[-1][0] == stack[-2][0]:
-                _, count = stack.pop()
-                stack[-1][1] += count
         
         return "".join(ch * x for ch,x in stack)
         
