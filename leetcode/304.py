@@ -1,5 +1,5 @@
 # 304. Range Sum Query 2D - Immutable
-# https://leetcode.com/problems/range-sum-query-2d-immutable/
+# https://leetcode.com/problems/range-sum-query-2d-immutable
 
 class NumMatrix:
 ​
@@ -21,8 +21,6 @@ class NumMatrix:
                 self.prefix[i][j] += self.prefix[i - 1][j]
 ​
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
-        m, n = row2 - row1, col2 - col1
-        
         left = self.prefix[row2 + 1][col1] - self.prefix[row1][col1]
         right = self.prefix[row2 + 1][col2 + 1] - self.prefix[row1][col2 + 1]
 ​
