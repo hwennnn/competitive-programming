@@ -4,15 +4,13 @@
 class Solution:
     def minSpeedOnTime(self, dist: List[int], hour: float) -> int:
         n = len(dist)
-        ihour = hour // 1 + (1 if hour % 1 != 0 else 0)
-        if ihour < n: return -1
-        
+​
         def good(x):
             t = 0
             
             for i, d in enumerate(dist):
                 if i != n - 1:
-                    h = d // x + (1 if d % x != 0 else 0)
+                    h = math.ceil(d / x)
                 else:
                     h = d / x
 ​
@@ -21,7 +19,7 @@ class Solution:
             return t <= hour
             
 ​
-        left, right = 1, 10 ** 7
+        left, right = 1, 10 ** 7 + 1
         
         while left < right:
             mid = left + (right - left) // 2
@@ -31,6 +29,6 @@ class Solution:
             else:
                 left = mid + 1
         
-        return left
+        return left if left <= 10 ** 7 else -1
             
         
