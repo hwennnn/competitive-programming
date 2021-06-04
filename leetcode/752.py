@@ -7,27 +7,19 @@ class Solution:
         visited = set(['0000'])
         queue = collections.deque([('0000', 0)])
         
-        def construct(lock):
-            res = []
+        while queue:
+            lock, step = queue.popleft()
+            
+            if lock in forbidden: continue
+            if lock == target: return step
             
             for i in range(4):
-                if lock[i] == '0':
-                    res.append(lock[:i] + '9' + lock[i + 1:])
-                    
-                res.append(lock[:i] + str((int(lock[i]) + 1) % 10) + lock[i + 1:])
-                res.append(lock[:i] + str((int(lock[i]) - 1) % 10) + lock[i + 1:])
-​
-            return res
-        
-        while queue:
-            current, step = queue.popleft()
-            
-            if current not in forbidden:
-                if current == target: return step
-​
-                for p in construct(current):
+                w1 = lock[:i] + str((int(lock[i]) + 1) % 10) + lock[i + 1:]
+                w2 = lock[:i] + str((int(lock[i]) - 1) % 10) + lock[i + 1:]
+                
+                for p in (w1, w2):
                     if p not in visited and p not in forbidden:
                         queue.append((p, step + 1))
                         visited.add(p)
-        
+​
         return -1
