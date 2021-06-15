@@ -1,5 +1,5 @@
 # 473. Matchsticks to Square
-# https://leetcode.com/problems/matchsticks-to-square/
+# https://leetcode.com/problems/matchsticks-to-square
 
 class Solution:
     def makesquare(self, sticks: List[int]) -> bool:
@@ -8,6 +8,8 @@ class Solution:
         target = ssum // 4
         if ssum % 4 != 0: return False
         dp = {}
+        
+        sticks.sort(reverse = 1)
         
         def hashing(curr, formed, used):
             return (curr, formed, tuple(list(sorted(used))))
