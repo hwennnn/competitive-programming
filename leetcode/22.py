@@ -2,21 +2,25 @@
 # https://leetcode.com/problems/generate-parentheses/
 
 class Solution:
-    def generateParenthesis(self, n: int):
-        res = []
-        
-        def backtrack(s, left, right):
-            if len(s) == n*2:
-                res.append(s)
-                return
-            
-            if left < n:
-                backtrack(s+"(", left+1, right)
-                
-            if right < left:
-                backtrack(s+")", left, right+1)
-            
-
-        backtrack("", 0, 0)
-        
-        return res
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = set()
+        
+        def backtrack(curr = [], opened = 0, closed = 0):
+            if opened + closed == n * 2:
+                res.add("".join(curr))
+                return
+            
+            if closed < opened:
+                curr.append(")")
+                backtrack(curr, opened, closed + 1)
+                curr.pop()
+            
+            if opened < n:
+                curr.append("(")
+                backtrack(curr, opened + 1, closed)
+                curr.pop()
+​
+        
+        backtrack()
+        
+        return list(res)
