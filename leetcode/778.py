@@ -1,5 +1,5 @@
 # 778. Swim in Rising Water
-# https://leetcode.com/problems/swim-in-rising-water/
+# https://leetcode.com/problems/swim-in-rising-water
 
 class Solution:
     def swimInWater(self, grid: List[List[int]]) -> int:
@@ -13,7 +13,6 @@ class Solution:
             for dx, dy in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
                 if 0 <= dx < rows and 0 <= dy < cols and (dx, dy) not in visited and grid[dx][dy] <= mmax:
                     if dfs(dx, dy, mmax, visited): return True
-                    if (x, y) in visited: visited.remove((x, y))
                         
             return False
             
