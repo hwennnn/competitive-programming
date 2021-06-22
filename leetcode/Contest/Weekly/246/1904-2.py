@@ -1,5 +1,5 @@
 # 1904. The Number of Full Rounds You Have Played
-# https://leetcode.com/problems/the-number-of-full-rounds-you-have-played/
+# https://leetcode.com/problems/the-number-of-full-rounds-you-have-played
 
 class Solution:
     def numberOfRounds(self, startTime: str, finishTime: str) -> int:
@@ -12,4 +12,4 @@ class Solution:
         start = sHH * 60 + sMM
         finish = fHH * 60 + fMM
         
-        return finish // 15 - (start // 15 + (start % 15 > 0))
+        return max(0, finish // 15 - (start // 15 + (start % 15 > 0)))
