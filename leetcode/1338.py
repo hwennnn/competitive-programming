@@ -1,22 +1,17 @@
 # 1338. Reduce Array Size to The Half
-# https://leetcode.com/problems/reduce-array-size-to-the-half/
+# https://leetcode.com/problems/reduce-array-size-to-the-half
 
 class Solution:
-    def minSetSize(self, arr: List[int]) -> int:
-        c = Counter(arr)
-        v = sorted(c.values(), reverse = True)
-        
-        n = len(arr)
-        half = n // 2
-        res = 0
-        
-        for x in v:
-            n -= x
-            res += 1
-            
-            if n <= half:
-                return res
-        
-        return res
-        
-        
+    def minSetSize(self, arr: List[int]) -> int:
+        n = len(arr)
+        t = (n + 1) // 2
+        count = collections.Counter(arr)
+        res = 0
+        
+        for v in sorted(count.values(), reverse = 1):
+            n -= v
+            res += 1
+            if n <= t: return res
+        
+        return res
+        
